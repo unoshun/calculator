@@ -1,57 +1,61 @@
-let prevNumber = ''
+let prevInput = '0'
 let calculationOperator = ''
-let currentNumber = '0'
+let currentInput = '0'
 
 const inputNumber = (number) => {
-  if (currentNumber === '0') {
-    currentNumber = number
+  if (currentInput === '0') {
+    currentInput = number
   } else {
-    currentNumber += number
+    currentInput += number
   }
 }
 
 const inputOperator = (operator) => {
   if (calculationOperator === '') {
-    prevNumber = currentNumber
+    prevInput = currentInput
   }
   calculationOperator = operator
-  currentNumber = ''
+  currentInput = '0'
 }
 
 const inputDecimal = (dot) => {
-  if (currentNumber.includes('.')) {
+  if(currentInput.includes('.')) {
     return
   }
-  currentNumber += dot
+  currentInput += dot
+}
+
+const getPercentage = () => {
+  currentInput = currentInput / 100
 }
 
 const calculate = () => {
-  let result = ''
-  switch (calculationOperator) {
+  let result = 0
+  switch(calculationOperator) {
     case '+':
-      result = parseFloat(prevNumber) + parseFloat(currentNumber)
+      result = parseFloat(prevInput) + parseFloat(currentInput)
       break
     case '-':
-      result = prevNumber - currentNumber
+      result = parseFloat(prevInput) - parseFloat(currentInput)
       break
     case '*':
-      result = prevNumber * currentNumber
+      result = parseFloat(prevInput) * parseFloat(currentInput)
       break
     case '/':
-      result = prevNumber / currentNumber
+      result = parseFloat(prevInput) / parseFloat(currentInput)
       break
     default:
       return
   }
-  currentNumber = result
+  currentInput = result.toString()
   calculationOperator = ''
-  prevNumber = ''
+  prevInput = '0'
 }
 
 const clearAll = () => {
-  prevNumber = ''
+  prevInput = '0'
   calculationOperator = ''
-  currentNumber = '0'
+  currentInput = '0'
 }
 
 const calculatorScreen = document.querySelector(".calculator-screen")
@@ -62,9 +66,9 @@ const updateScreen = (number) => {
 const numbers = document.querySelectorAll(".number")
 
 numbers.forEach((number) => {
-  number.addEventListener("click", (event) => {
+  number.addEventListener(("click"), (event) => {
     inputNumber(event.target.value)
-    updateScreen(currentNumber)
+    updateScreen(currentInput)
   })
 })
 
@@ -80,19 +84,26 @@ const equalSign = document.querySelector('.equal-sign')
 
 equalSign.addEventListener("click", () => {
   calculate()
-  updateScreen(currentNumber)
+  updateScreen(currentInput)
 })
 
 const clearBtn = document.querySelector('.all-clear')
 
 clearBtn.addEventListener("click", () => {
   clearAll()
-  updateScreen(currentNumber)
+  updateScreen(currentInput)
 })
 
 const decimal = document.querySelector(".decimal")
 
 decimal.addEventListener("click", (event) => {
   inputDecimal(event.target.value)
-  updateScreen(currentNumber)
+  updateScreen(currentInput)
+})
+
+const percentage = document.querySelector(".percentage")
+
+percentage.addEventListener("click", (event) => {
+  getPercentage()
+  updateScreen(currentInput)
 })
