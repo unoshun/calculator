@@ -16,6 +16,28 @@ const inputOperator = (operator) => {
   currentInput = '0'
 }
 
+const calculate = () => {
+  let result = 0
+  switch(calculationOperator) {
+    case '+':
+      result = parseFloat(prevInput) + parseFloat(currentInput)
+      break
+    case '-':
+      result = parseFloat(prevInput) - parseFloat(currentInput)
+      break
+    case '*':
+      result = parseFloat(prevInput) * parseFloat(currentInput)
+      break
+    case '/':
+      result = parseFloat(prevInput) / parseFloat(currentInput)
+      break
+    default:
+      return
+  }
+  currentInput = result.toString()
+  calculationOperator = ''
+}
+
 const calculatorScreen = document.querySelector('.calculator-screen')
 
 const updateScreen = (number) => {
@@ -37,4 +59,11 @@ operators.forEach((operator) => {
   operator.addEventListener("click", (event) => {
     inputOperator(event.target.value)
   })
+})
+
+const equalSign = document.querySelector('.equal-sign')
+
+equalSign.addEventListener("click", () => {
+  calculate()
+  updateScreen(currentInput)
 })
