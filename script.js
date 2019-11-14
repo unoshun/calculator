@@ -16,27 +16,20 @@ const inputOperator = (operator) => {
   currentInput = '0'
 }
 
-const inputDecimal = (dot) => {
-  if(currentInput.includes('.')) {
-    return
-  }
-  currentInput += dot
-}
-
 const calculate = () => {
   let result = 0
   switch(calculationOperator) {
     case '+':
-      result = parseFloat(prevInput) + parseFloat(currentInput)
+      result = parseInt(prevInput) + parseInt(currentInput)
       break
     case '-':
-      result = parseFloat(prevInput) - parseFloat(currentInput)
+      result = parseInt(prevInput) - parseInt(currentInput)
       break
     case '*':
-      result = parseFloat(prevInput) * parseFloat(currentInput)
+      result = parseInt(prevInput) * parseInt(currentInput)
       break
     case '/':
-      result = parseFloat(prevInput) / parseFloat(currentInput)
+      result = parseInt(prevInput) / parseInt(currentInput)
       break
     default:
       return
@@ -85,12 +78,5 @@ const clearBtn = document.querySelector('.all-clear')
 
 clearBtn.addEventListener("click", () => {
   clearAll()
-  updateScreen(currentInput)
-})
-
-const decimal = document.querySelector(".decimal")
-
-decimal.addEventListener("click", (event) => {
-  inputDecimal(event.target.value)
   updateScreen(currentInput)
 })
