@@ -23,6 +23,10 @@ const inputDecimal = (dot) => {
   currentInput += dot
 }
 
+const getPercentage = () => {
+  currentInput = currentInput / 100
+}
+
 const calculate = () => {
   let result = 0
   switch(calculationOperator) {
@@ -88,9 +92,16 @@ clearBtn.addEventListener("click", () => {
   updateScreen(currentInput)
 })
 
-const decimal = document.querySelector(".decimal")
+const decimal = document.querySelector('.decimal')
 
 decimal.addEventListener("click", (event) => {
   inputDecimal(event.target.value)
+  updateScreen(currentInput)
+})
+
+const percentage = document.querySelector('.percentage')
+
+percentage.addEventListener("click", (event) => {
+  getPercentage()
   updateScreen(currentInput)
 })
