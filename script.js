@@ -16,6 +16,13 @@ const inputOperator = (operator) => {
   currentInput = '0'
 }
 
+const inputDecimal = (dot) => {
+  if(currentInput.includes('.')) {
+    return
+  }
+  currentInput += dot
+}
+
 const calculate = () => {
   let result = 0
   switch(calculationOperator) {
@@ -36,6 +43,12 @@ const calculate = () => {
   }
   currentInput = result.toString()
   calculationOperator = ''
+}
+
+const clearAll = () => {
+  prevInput = '0'
+  calculationOperator = ''
+  currentInput = '0'
 }
 
 const calculatorScreen = document.querySelector('.calculator-screen')
@@ -65,5 +78,19 @@ const equalSign = document.querySelector('.equal-sign')
 
 equalSign.addEventListener("click", () => {
   calculate()
+  updateScreen(currentInput)
+})
+
+const clearBtn = document.querySelector('.all-clear')
+
+clearBtn.addEventListener("click", () => {
+  clearAll()
+  updateScreen(currentInput)
+})
+
+const decimal = document.querySelector(".decimal")
+
+decimal.addEventListener("click", (event) => {
+  inputDecimal(event.target.value)
   updateScreen(currentInput)
 })
