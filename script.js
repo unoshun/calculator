@@ -20,16 +20,16 @@ const calculate = () => {
   let result = 0
   switch(calculationOperator) {
     case '+':
-      result = parseFloat(prevInput) + parseFloat(currentInput)
+      result = parseInt(prevInput) + parseInt(currentInput)
       break
     case '-':
-      result = parseFloat(prevInput) - parseFloat(currentInput)
+      result = parseInt(prevInput) - parseInt(currentInput)
       break
     case '*':
-      result = parseFloat(prevInput) * parseFloat(currentInput)
+      result = parseInt(prevInput) * parseInt(currentInput)
       break
     case '/':
-      result = parseFloat(prevInput) / parseFloat(currentInput)
+      result = parseInt(prevInput) / parseInt(currentInput)
       break
     default:
       return
